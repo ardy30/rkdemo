@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_show_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ll_show_player"
+        android:layout_alignRight="@+id/ll_show_player"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/show_all_displays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/presentation_show_all_displays"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/presentation_activity_text"/>
+
+        <ListView
+            android:id="@+id/display_list"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_show_player"
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_show_screen"
+        android:layout_marginLeft="20px"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20px"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gain_l"
+                    android:textSize="25dp"/>
+
+                <SeekBar
+                    android:id="@+id/seekbar_gain_l"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dip"
+                    android:layout_marginRight="30dip"
+                    android:max="10"
+                    android:progress="6"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gain_r"
+                    android:textSize="25dp"/>
+
+                <SeekBar
+                    android:id="@+id/seekbar_gain_r"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dip"
+                    android:layout_marginRight="30dip"
+                    android:max="10"
+                    android:progress="6"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="播放进度"
+                    android:textSize="25dp"/>
+
+                <SeekBar
+                    android:id="@+id/seekbar_play_progress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dip"
+                    android:layout_marginRight="30dip"
+                    android:max="100"
+                    android:progress="0"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_control_button_row_1"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@id/ll_show_screen"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play"/>
+
+        <Button
+            android:id="@+id/btn_pause"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pause"/>
+
+        <Button
+            android:id="@+id/btn_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sswitch"/>
+
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/next"/>
+
+        <Button
+            android:id="@+id/btn_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/preview"/>
+
+        <Button
+            android:id="@+id/btn_channel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/channel"/>
+
+        <Button
+            android:id="@+id/btn_increase_sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/increase_sound"/>
+
+        <Button
+            android:id="@+id/btn_decrease_sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/decrease_sound"/>
+
+        <Button
+            android:id="@+id/btn_duplicate_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/duplicate_screen"/>
+
+        <Button
+            android:id="@+id/btn_full_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/full_screen"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_control_button_row_2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@+id/ll_control_button_row_1"
+        android:orientation="vertical">
+
+        <!--
+        Button
+            android:id="@+id/btn_landscape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/landscape" />
+
+		<Button
+            android:id="@+id/btn_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/horizontal" !
+        -->
+
+        <Button
+            android:id="@+id/btn_linein"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/linein"/>
+
+        <Button
+            android:id="@+id/btn_poweroff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/poweroff"/>
+
+        <Button
+            android:id="@+id/btn_reboot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reboot"/>
+
+        <Button
+            android:id="@+id/btn_ota_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ota_update"/>
+
+        <Button
+            android:id="@+id/btn_apk_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/apk_update"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_control_button_row_3"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@+id/ll_control_button_row_2"
+        android:orientation="vertical">
+
+        <!--
+        Button
+            android:id="@+id/btn_passthrough"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/passthrough" />
+
+        <Button
+            android:id="@+id/btn_screenpercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/screenpercent" /
+        -->
+
+        <Button
+            android:id="@+id/btn_audio_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/audio_mode"/>
+
+        <Button
+            android:id="@+id/btn_hdmi_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hdmi_mode"/>
+
+        <Button
+            android:id="@+id/btn_vga_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vga_mode"/>
+
+        <Button
+            android:id="@+id/btn_nfs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nfs"/>
+
+        <Button
+            android:id="@+id/btn_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menu"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/ll_control_button_row_3"
+        android:background="@android:color/darker_gray">
+
+        <TextView
+            android:id="@+id/tv_remind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:text="USB设备中扫描到的 "
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+
+        <ListView
+            android:id="@+id/lv_scaned_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_remind">
+        </ListView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <include layout="@layout/popup_menu"/>
+    </RelativeLayout>
+
+    <SurfaceView
+        android:id="@+id/video_surface1"
+        android:layout_width="450dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="280dp"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

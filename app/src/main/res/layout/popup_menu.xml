@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="40dip"
+    android:background="@drawable/menu_bg"
+    android:scaleType="fitXY"
+    android:id="@+id/menu_setting"
+    android:gravity="center"
+    android:focusable="false"
+    android:orientation="vertical">
+
+	<LinearLayout
+	    android:id="@+id/linear_item1"
+	    android:nextFocusUp  ="@+id/linear_item6"
+	    android:nextFocusDown="@+id/linear_item2"
+	    style="@style/popup_menu_LinearLayout"> 
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1.2">
+			<ImageView
+    		android:background="@drawable/item_mode"
+	    	style="@style/popup_menu_ImageView"
+	    	android:padding="5dip"
+    		android:scaleType="fitXY"/>
+		</LinearLayout>
+		
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="2.5">
+			<TextView
+				android:id="@+id/linear_text1_tile"	    
+		        android:text="@string/menu_item_title1"
+		    	style="@style/popup_menu_TextView"/>
+		</LinearLayout>
+		
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_left1"
+    		android:background="@drawable/arrow_left"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+	    
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="6">	
+		    <TextView
+				android:id="@+id/linear_text10_tile"	    
+		        android:text="@string/app_name"
+		    	style="@style/popup_menu_TextView"/>
+   		</LinearLayout>
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_right1"
+    		android:background="@drawable/arrow_right"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+    </LinearLayout>
+    
+    <ImageView style="@style/popup_menu_Line"/>
+    
+	<LinearLayout
+	    android:id="@+id/linear_item2"
+	    android:nextFocusDown="@+id/linear_item3"
+	    android:nextFocusUp="@+id/linear_item1"
+	    style="@style/popup_menu_LinearLayout"> 
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1.2">
+			<ImageView
+    		android:background="@drawable/item_3d"
+	    	style="@style/popup_menu_ImageView"
+	    	android:padding="5dip"
+    		android:scaleType="fitXY"/>
+		</LinearLayout>
+		
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="2.5">
+			<TextView
+				android:id="@+id/linear_text2_tile"	    
+		        android:text="@string/menu_item_title2"
+		    	style="@style/popup_menu_TextView"/>
+		</LinearLayout>
+		
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_left2"
+    		android:background="@drawable/arrow_left"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+	    
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="6">	
+		    <TextView
+				android:id="@+id/linear_text20_tile"
+				android:singleLine="true"
+				android:ellipsize="start"
+		        android:text="@string/app_name"
+		    	style="@style/popup_menu_TextView"/>
+   		</LinearLayout>
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_right2"
+    		android:background="@drawable/arrow_right"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+    </LinearLayout>
+    
+    <ImageView style="@style/popup_menu_Line"/>
+    
+	<LinearLayout
+	    android:id="@+id/linear_item3"
+	    android:nextFocusDown="@+id/linear_item4"
+	    android:nextFocusUp="@+id/linear_item2"
+	    style="@style/popup_menu_LinearLayout"> 
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1.2">
+			<ImageView
+    		android:background="@drawable/item_scale"
+	    	style="@style/popup_menu_ImageView"
+	    	android:padding="5dip"
+    		android:scaleType="fitXY"/>
+		</LinearLayout>
+		
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="2.5">
+			<TextView
+				android:id="@+id/linear_text3_tile"	    
+		        android:text="@string/menu_item_title3"
+		    	style="@style/popup_menu_TextView"/>
+		</LinearLayout>
+		
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_left3"
+    		android:background="@drawable/arrow_left"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+	    
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="6">	
+		    <TextView
+				android:id="@+id/linear_text30_tile"	    
+		        android:text="@string/app_name"
+		    	style="@style/popup_menu_TextView"/>
+   		</LinearLayout>
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_right3"
+    		android:background="@drawable/arrow_right"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+    </LinearLayout>
+    
+    <ImageView style="@style/popup_menu_Line"/>
+    	
+	<LinearLayout
+	    android:id="@+id/linear_item4"
+	    android:nextFocusDown="@+id/linear_item5"
+	    android:nextFocusUp="@+id/linear_item3"
+	    style="@style/popup_menu_LinearLayout"> 
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1.2">
+			<ImageView
+    			android:background="@drawable/item_channel"
+	    		style="@style/popup_menu_ImageView"
+	    		android:padding="5dip"
+    			android:scaleType="fitXY"/>
+		</LinearLayout>
+		
+ 	    <LinearLayout
+ 	    	android:focusable="true"
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="2.5">
+			<TextView
+				android:id="@+id/linear_text4_tile"	    
+		        android:text="@string/menu_item_title4"
+		    	style="@style/popup_menu_TextView"/>
+		</LinearLayout>
+		
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_left4"
+    		android:background="@drawable/arrow_left"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+	    
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical|center_horizontal"
+			android:layout_weight="6">	
+		    <TextView
+				android:id="@+id/linear_text40_tile"	    
+		        android:text="@string/app_name"
+		    	style="@style/popup_menu_TextView"/>
+   		</LinearLayout>
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_right4"
+    		android:background="@drawable/arrow_right"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+    </LinearLayout>
+    
+    <ImageView style="@style/popup_menu_Line"/>
+    	
+	<LinearLayout
+	    android:id="@+id/linear_item5"
+	    android:nextFocusDown="@+id/linear_item6"
+	    android:nextFocusUp  ="@+id/linear_item4"
+	    style="@style/popup_menu_LinearLayout"> 
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1.2">
+			<ImageView
+    		android:background="@drawable/item_channel"
+	    	style="@style/popup_menu_ImageView"
+	    	android:padding="5dip"
+    		android:scaleType="fitXY"/>
+		</LinearLayout>
+		
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="2.5">
+			<TextView
+				android:id="@+id/linear_text5_tile"	    
+		        android:text="@string/menu_item_title5"
+		    	style="@style/popup_menu_TextView"/>
+		</LinearLayout>
+		
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_left5"
+    		android:background="@drawable/arrow_left"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+	    
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="6">	
+		    <TextView
+				android:id="@+id/linear_text50_tile"
+				android:ellipsize="start"
+				android:singleLine="true"
+				android:focusable="true"
+		        android:text="@string/app_name"
+		    	style="@style/popup_menu_TextView"/>
+   		</LinearLayout>
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_right5"
+    		android:background="@drawable/arrow_right"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+    </LinearLayout>
+    
+    <ImageView style="@style/popup_menu_Line"/> 
+
+ 	<LinearLayout
+	    android:id="@+id/linear_item6"
+	    android:nextFocusDown="@+id/linear_item7"
+	    android:nextFocusUp  ="@+id/linear_item5"
+	    style="@style/popup_menu_LinearLayout"> 
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1.2">
+			<ImageView
+    		android:background="@drawable/item_text"
+	    	style="@style/popup_menu_ImageView"
+	    	android:padding="5dip"
+    		android:scaleType="fitXY"/>
+		</LinearLayout>
+		
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="2.5">
+			<TextView
+				android:id="@+id/linear_text6_tile"	    
+		        android:text="@string/menu_item_title6"
+		    	style="@style/popup_menu_TextView"/>
+		</LinearLayout>
+		
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_left6"
+    		android:background="@drawable/arrow_left"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+	    
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="6">	
+		    <TextView
+				android:id="@+id/linear_text60_tile"
+				android:ellipsize="start"
+				android:singleLine="true"
+				android:focusable="true"
+		        android:text="@string/app_name"
+		    	style="@style/popup_menu_TextView"/>
+   		</LinearLayout>
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_right6"
+    		android:background="@drawable/arrow_right"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+    </LinearLayout>
+
+
+    <ImageView style="@style/popup_menu_Line"/> 
+
+	<LinearLayout
+	    android:id="@+id/linear_item7"
+	    android:nextFocusUp="@+id/linear_item6"
+	    android:nextFocusDown="@+id/linear_item1"
+	    style="@style/popup_menu_LinearLayout"> 
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1.2">
+			<ImageView
+    		android:background="@drawable/item_voice"
+	    	style="@style/popup_menu_ImageView"
+	    	android:padding="5dip"
+    		android:scaleType="fitXY"/>
+		</LinearLayout>
+		
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="2.5">
+			<TextView
+				android:id="@+id/linear_text7_tile"	    
+		        android:text="@string/menu_item_title7"
+		    	style="@style/popup_menu_TextView"/>
+		</LinearLayout>
+		
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_left7"
+    		android:background="@drawable/voice_no"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+	    
+ 	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="6">	
+		   <ProgressBar android:id="@+id/progress_volume"
+		        style="?android:attr/progressBarStyleHorizontal"
+		        android:progressDrawable="@drawable/seekbar_style"
+		        android:layout_width="fill_parent"
+		        android:layout_height="20dp"/>
+   		</LinearLayout>
+	    <LinearLayout
+			android:layout_width="0px"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|center_horizontal"
+			android:gravity="center"
+			android:layout_weight="1">
+			<ImageView
+			android:id="@+id/linear_image_right7"
+    		android:background="@drawable/voice_ok"
+	    	style="@style/popup_menu_ImageView"/>
+		</LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+

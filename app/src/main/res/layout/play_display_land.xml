@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:id="@+id/root_layout" android:background="@color/black">
+	<android.rk.RockVideoPlayer.VideoDisplayView
+		android:id="@+id/surface_view" android:layout_gravity="center"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:layout_centerInParent="true" />
+
+	<LinearLayout android:id="@+id/layout_dolby_osd"
+		android:orientation="vertical" android:layout_alignParentBottom="true" 
+		android:layout_alignParentRight="true" 
+		android:layout_width="300dip" android:layout_height="120dip"
+		android:layout_marginBottom="50dip" android:layout_marginRight="50dip">
+		<ImageView android:id="@+id/dolby_osd" android:src="@drawable/dobly"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:gravity="center" android:scaleType="fitXY"/>
+	</LinearLayout>
+	
+	<LinearLayout android:id="@+id/progress_indicator" android:visibility="gone"
+		android:orientation="vertical" android:layout_centerInParent="true"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<ProgressBar android:id="@+id/progress_loading"
+			style="?android:attr/progressBarStyleLarge" android:layout_gravity="center"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+		<TextView android:id="@+id/progress_text"
+			android:paddingTop="5dip" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:layout_gravity="center"
+			android:text="@string/loading_video" android:textSize="@dimen/default_text_size_middle"
+			android:textColor="#ffffffff" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/percent_indicator"
+		android:orientation="vertical" android:layout_centerInParent="true"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<ProgressBar android:id="@+id/percent_view"
+			style="?android:attr/progressBarStyleLarge" android:layout_gravity="center"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+		<TextView android:id="@+id/percent_text" android:paddingTop="5dip"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_gravity="center" android:textSize="@dimen/default_text_size_middle"
+			android:textColor="#ffffffff" />
+	</LinearLayout>
+
+	<!--  add by wangbo 2010.4.19 -->
+	<LinearLayout android:id="@+id/layout_subtitle"
+		android:orientation="vertical" android:layout_alignParentBottom="true"
+		android:layout_marginBottom="30dip"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		<TextView android:id="@+id/txtsubtitle" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:textSize="@dimen/default_text_size_huge"
+			android:gravity="center" android:shadowColor="#ff0000ee"
+			android:shadowRadius="1.0" />
+		<ImageView android:id="@+id/imgsubtitle"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:gravity="center" />
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/layout_new_controller"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:visibility="gone" android:layout_centerHorizontal="true">
+		<include layout="@layout/new_controller" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/layout_setting"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:visibility="gone" android:layout_centerInParent="true">
+		<include layout="@layout/popup_menu" />
+	</LinearLayout>
+</RelativeLayout>

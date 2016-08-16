@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="surfacewidth">300dip</dimen>
+	<dimen name="surfaceheight">200dip</dimen>
+    <dimen name="surfacewidthselect">180dip</dimen>
+	<dimen name="surfaceheightselect">120dip</dimen>
+	
+	<dimen name="seekbar_thumb_radius">25dp</dimen>
+	<dimen name="seekbar_thumb_width_outer">50dp</dimen>
+	<dimen name="seekbar_thumb_width_inner">46dp</dimen>
+
+    <dimen name="common_menu_width">360dp</dimen>
+    <dimen name="common_menu_icon_size">32dp</dimen>
+    <dimen name="common_menu_item_textsize">24sp</dimen>
+
+	   <dimen name="default_text_size_middle">25px</dimen>
+    <dimen name="default_text_size_huge">55px</dimen>
+    <dimen name="default_win_error_height">450px</dimen>
+
+</resources>

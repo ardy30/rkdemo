@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="3sp"
+    android:gravity="center">
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/video_image"
+        android:scaleType="fitXY"
+        android:gravity="center"/>
+    <android.rk.RockVideoPlayer.UIView.MyVideoView
+        android:id="@+id/smallvideoview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone">
+    </android.rk.RockVideoPlayer.UIView.MyVideoView>
+ 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/video_name"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:scrollHorizontally="true"
+	android:marqueeRepeatLimit="marquee_forever"
+	android:ellipsize="marquee"
+	android:singleLine="true"
+	android:paddingLeft="6dip"
+        android:paddingRight="6dip"
+        android:background="#A0808080"/>	
+ 		
+</RelativeLayout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Rockchip Android MID Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:id="@+id/http_menubar_land"
+	android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:orientation="vertical">
+<RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true" 
+	    android:orientation="vertical" >
+	  <LinearLayout 
+		        android:orientation="vertical" 
+		        android:layout_width="fill_parent" 
+		        android:layout_height="wrap_content">   
+	   </LinearLayout>
+	   <LinearLayout 
+		        android:orientation="vertical" 
+		        android:layout_width="fill_parent" 
+		        android:layout_height="wrap_content">   
+	 <LinearLayout android:id="@+id/http_time_progress"
+        android:orientation="horizontal" 
+        android:layout_width="fill_parent" 
+        android:layout_height="55dip" 
+        android:layout_gravity="center" 
+        android:background="@drawable/bottom_progress"
+         android:layout_alignParentTop="true">
+        <FrameLayout 
+			android:layout_width="0dip"
+			android:layout_height="fill_parent" 
+			android:layout_weight="0.1">	   				
+			<android.rk.RockVideoPlayer.UIView.RepeatingImageButton 
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent" 
+				android:focusable="true"
+				android:background="@drawable/seletc_framelayout_bk"
+				android:src="@drawable/video_volumeminus"
+				android:id="@+id/http_menubar_button_volumeminus"/>
+		</FrameLayout>     
+		 <LinearLayout android:id="@+id/http_time_progress"
+		        android:orientation="horizontal" 
+		        android:layout_width="wrap_content" 
+		        android:layout_weight="0.8"
+		        android:layout_height="fill_parent"  
+		        android:layout_gravity="center" >
+		        <TextView android:id="@+id/http_time_current"
+		            android:textSize="14sp"
+		            android:textStyle="bold"
+		            android:paddingTop="4dip"
+		            android:paddingLeft="4dip"
+		            android:layout_height="wrap_content"
+		            android:paddingRight="4dip" 
+		            android:layout_gravity="center_vertical" 
+		            android:layout_width="wrap_content"
+		            android:focusable="false"
+		            android:gravity="center_horizontal" 
+		            android:textColor="@color/white"
+		            android:layout_weight="1"/>
+		        <SeekBar
+		            android:id="@+id/http_mediacontroller_progress"
+		            style="?android:attr/progressBarStyleHorizontal"
+		            android:layout_width="0dip"
+		            android:layout_weight="8"
+		            android:layout_height="30dip"
+		            android:focusable="true"
+		            android:layout_alignParentLeft="true"
+		            android:layout_alignParentRight="true" 
+		            android:layout_gravity="center_vertical"/>
+		
+		        <TextView android:id="@+id/http_time_total"
+		            android:textSize="14sp"
+		            android:textStyle="bold"
+		            android:paddingTop="4dip"
+		            android:paddingRight="4dip"
+		            android:layout_height="wrap_content"
+		            android:paddingLeft="4dip" 
+		            android:layout_gravity="center_vertical" 
+		            android:layout_width="wrap_content" 
+		            android:layout_weight="1"
+		            android:focusable="false"
+		            android:gravity="center_horizontal" 
+		            android:textColor="@color/white"/>
+	      </LinearLayout>
+	      
+	       <FrameLayout 
+			android:layout_width="0dip"
+			android:layout_height="fill_parent"
+			android:layout_weight="0.1" >	   				
+			<android.rk.RockVideoPlayer.UIView.RepeatingImageButton 
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent" 
+				android:focusable="true"
+				android:background="@drawable/seletc_framelayout_bk"
+				android:src="@drawable/video_volumeplus"
+				android:id="@+id/http_menubar_button_volumeplus"
+		       android:nextFocusLeft="@id/http_mediacontroller_progress"/>
+		</FrameLayout>     
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/http_menubar_button"
+    	android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:background="@drawable/bottombar_back"
+    	android:layout_gravity="center"
+    	android:layout_alignParentBottom="true">
+		<FrameLayout 
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent"
+			android:layout_weight="1">	   				
+			<ImageView android:layout_width="fill_parent" 
+				android:layout_height="fill_parent" 
+				android:focusable="true"
+				android:background="@drawable/seletc_framelayout_bk"
+				android:src="@drawable/video_button_pause"
+				android:id="@+id/http_menubar_button_play"/>
+		</FrameLayout>
+				
+		<FrameLayout android:layout_width="wrap_content"
+			android:layout_height="fill_parent"
+			android:layout_weight="1">	   
+			<ImageView android:layout_width="fill_parent" 
+				android:layout_height="fill_parent" 
+				android:id="@+id/http_menubar_button_screenmode" 
+				android:focusable="true"
+				android:background="@drawable/seletc_framelayout_bk"
+				android:src="@drawable/video_screenmode_original"/>
+		</FrameLayout>
+		
+		<FrameLayout android:layout_width="wrap_content"
+			android:layout_height="fill_parent"
+			android:layout_weight="1">	   
+			<ImageView android:id="@+id/http_menubar_button_return" 
+				android:background="@drawable/seletc_framelayout_bk"
+				android:src="@drawable/video_return" 
+				android:focusable="true"
+				android:layout_height="fill_parent" 
+				android:layout_width="fill_parent"/>
+		</FrameLayout>
+	</LinearLayout>
+	</LinearLayout>
+</RelativeLayout>
+	<LinearLayout android:layout_width="fill_parent" 
+				  android:layout_height="wrap_content" 
+				  android:orientation="horizontal" 
+				  android:id="@+id/http_file_name" 
+				  android:background="@drawable/seletc_framelayout_bk" 
+				  android:layout_alignParentLeft="true">
+				  <TextView android:layout_width="fill_parent" 
+				  			android:layout_height="wrap_content" 
+				  			android:textSize="20dip"
+				  			android:layout_gravity="left" 
+				  			android:id="@+id/http_videofile_name">
+				  </TextView>
+	</LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:id="@+id/menubar_land"
+	android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:orientation="vertical">
+	<RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true" 
+	    android:orientation="vertical" >
+
+	   <LinearLayout 
+			android:orientation="vertical" 
+			android:layout_gravity="center"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="5dp">   
+	
+			<LinearLayout android:id="@+id/new_ctl_layout"
+		        android:orientation="vertical" 
+		        android:layout_width="fill_parent" 
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center">
+				<android.rk.RockVideoPlayer.UIView.TimedTextView
+					android:id="@+id/timed_textview"
+					android:layout_width="fill_parent"
+					android:layout_height="40sp"
+					android:layout_gravity="center"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp"/>
+				<android.rk.RockVideoPlayer.UIView.TimedProgressBar
+					android:background="@color/transparent"
+					android:id="@+id/timed_progressbar"
+					style="?android:attr/progressBarStyleHorizontal"
+					android:progressDrawable="@drawable/seekbar_style"
+					android:layout_gravity="center_vertical|center_horizontal"
+					android:gravity="center"
+					android:thumb="@drawable/seekbar_thumb"
+					android:layout_width="fill_parent"
+					android:layout_height="@dimen/seekbar_thumb_width_outer"
+					android:paddingLeft="15dp"
+					android:paddingRight="15dp"
+					android:minHeight="@dimen/seekbar_thumb_width_outer"
+					android:maxHeight="@dimen/seekbar_thumb_width_outer"
+					android:focusable="true"/>
+	      </LinearLayout>
+		</LinearLayout>
+	</RelativeLayout>
+
+	<LinearLayout android:layout_width="fill_parent" 
+				  android:layout_height="wrap_content" 
+				  android:orientation="horizontal" 
+				  android:id="@+id/file_name" 
+				  android:layout_alignParentLeft="true">
+				  <TextView android:layout_width="fill_parent" 
+				  			android:layout_height="wrap_content" 
+				  			android:textSize="@dimen/default_text_size_middle"
+				  			android:layout_gravity="left" 
+				  			android:id="@+id/videofile_name">
+				  </TextView>
+	</LinearLayout>
+
+	<LinearLayout android:layout_width="wrap_content" 
+				  android:layout_height="wrap_content" 
+				  android:orientation="horizontal" 
+				  android:id="@+id/ctl_play_pause" 
+				  android:layout_centerInParent="true">
+				  <ImageView android:layout_width="wrap_content" 
+					android:layout_height="wrap_content" 
+					android:focusable="true"
+					android:src="@drawable/video_button_pause"
+					android:id="@+id/btn_play_pause"/>
+	</LinearLayout>
+
+			
+</RelativeLayout>
+
