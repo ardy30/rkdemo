@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <Switch
+        android:id="@+id/switch_ethernet"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="有线连接开关"/>
+
+    <RadioGroup
+        android:id="@+id/rg_connect_way"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/switch_ethernet"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_dhcp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:text="DHCP"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+
+        <RadioButton
+            android:id="@+id/rb_static"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:text="手动设置"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:id="@+id/ll_ethernet"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rg_connect_way"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_static_ethernet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rg_connect_way"
+            android:layout_marginLeft="20dp"
+            android:text="手动配置有线网静态IP地址"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="IP地址"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/et_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入IP地址"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="子网掩码"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/et_mask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入子网掩码"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="DNS"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/et_dns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入DNS"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="网关IP"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/et_gateway"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入网关IP"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_connect"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_ethernet"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="连接"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"/>
+
+
+</RelativeLayout>

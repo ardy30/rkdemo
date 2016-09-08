@@ -1,5 +1,12 @@
 package com.android.presentation.app.util;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
@@ -26,12 +33,61 @@ public class ToolUtil {
                         .isDirectory());
             }
         });
-        for (File file : fileList) {
-            if (file.isFile())
-                files.add(file);
-            else
-                files.addAll(scanAllVideo(file.getAbsolutePath()));
-        }
+        if (fileList != null)
+            for (File file : fileList) {
+                if (file.isFile())
+                    files.add(file);
+                else
+                    files.addAll(scanAllVideo(file.getAbsolutePath()));
+            }
         return files;
+    }
+
+    /**
+     * 防止过快二次点击
+     */
+    private static long lastClickTime;
+
+    public static boolean isFastDoubleClick() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        if (0 < timeD && timeD < 300) {
+            return true;
+        }
+        lastClickTime = time;
+        return false;
+    }
+
+    /**
+     * 打开第三方软件
+     *
+     * @param context
+     * @param packageName
+     */
+    public static void openThirdApplication(Context context, String packageName) {
+        PackageManager packageManager = context.getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = packageManager.getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+        if (packageInfo != null) {
+            Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
+            resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+            resolveIntent.setPackage(packageInfo.packageName);
+            List<ResolveInfo> apps = packageManager.queryIntentActivities(
+                    resolveIntent, 0);
+            ResolveInfo resolveInfo = apps.iterator().next();
+            if (resolveInfo != null) {
+                String className = resolveInfo.activityInfo.name;
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                ComponentName cn = new ComponentName(packageName, className);
+                intent.setComponent(cn);
+                context.startActivity(intent);
+            }
+        }
     }
 }

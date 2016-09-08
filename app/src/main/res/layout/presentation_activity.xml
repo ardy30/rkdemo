@@ -32,13 +32,15 @@
             android:id="@+id/show_all_displays"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/presentation_show_all_displays"/>
+            android:text="@string/presentation_show_all_displays"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/presentation_activity_text"/>
+            android:text="@string/presentation_activity_text"
+            android:visibility="gone"/>
 
         <ListView
             android:id="@+id/display_list"
@@ -49,7 +51,7 @@
 
     <LinearLayout
         android:id="@+id/ll_show_player"
-        android:layout_width="450dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_show_screen"
         android:layout_marginLeft="20px"
@@ -137,7 +139,7 @@
 
     <LinearLayout
         android:id="@+id/ll_control_button_row_1"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20px"
         android:layout_marginTop="10px"
@@ -170,16 +172,16 @@
             android:text="@string/next"/>
 
         <Button
-            android:id="@+id/btn_preview"
+            android:id="@+id/btn_volume_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/preview"/>
+            android:text="VOL+"/>
 
         <Button
-            android:id="@+id/btn_channel"
+            android:id="@+id/btn_volume_reduce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/channel"/>
+            android:text="VOL-"/>
 
         <Button
             android:id="@+id/btn_increase_sound"
@@ -194,100 +196,86 @@
             android:text="@string/decrease_sound"/>
 
         <Button
-            android:id="@+id/btn_duplicate_screen"
+            android:id="@+id/btn_channel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/duplicate_screen"/>
+            android:text="@string/channel"/>
 
         <Button
-            android:id="@+id/btn_full_screen"
+            android:id="@+id/btn_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/full_screen"/>
+            android:text="@string/menu"/>
+
+        <Button
+            android:id="@+id/btn_nfs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nfs"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_control_button_row_2"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:layout_marginTop="10px"
         android:layout_toRightOf="@+id/ll_control_button_row_1"
         android:orientation="vertical">
 
-        <!--
-        Button
-            android:id="@+id/btn_landscape"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btn_hdmi_switch"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/landscape" />
+            android:text="HDMI声音"/>
 
-		<Button
-            android:id="@+id/btn_horizontal"
+        <Button
+            android:id="@+id/btn_spdif_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SPDIF声音"/>
+
+        <Button
+            android:id="@+id/btn_audio_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/horizontal" !
-        -->
+            android:text="@string/audio_mode"/>
 
         <Button
             android:id="@+id/btn_linein"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/linein"/>
 
         <Button
-            android:id="@+id/btn_poweroff"
+            android:id="@+id/btn_duplicate_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/poweroff"/>
+            android:text="@string/duplicate_screen"/>
 
         <Button
-            android:id="@+id/btn_reboot"
+            android:id="@+id/btn_preview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/reboot"/>
+            android:text="@string/preview"/>
 
         <Button
-            android:id="@+id/btn_ota_update"
+            android:id="@+id/btn_full_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ota_update"/>
+            android:text="@string/full_screen"/>
 
-        <Button
-            android:id="@+id/btn_apk_update"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/apk_update"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_control_button_row_3"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
         android:layout_marginTop="10px"
         android:layout_toRightOf="@+id/ll_control_button_row_2"
         android:orientation="vertical">
-
-        <!--
-        Button
-            android:id="@+id/btn_passthrough"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/passthrough" />
-
-        <Button
-            android:id="@+id/btn_screenpercent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/screenpercent" /
-        -->
-
-        <Button
-            android:id="@+id/btn_audio_mode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/audio_mode"/>
 
         <Button
             android:id="@+id/btn_hdmi_mode"
@@ -302,23 +290,106 @@
             android:text="@string/vga_mode"/>
 
         <Button
-            android:id="@+id/btn_nfs"
+            android:id="@+id/btn_get_hdmi_resolution"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nfs"/>
+            android:text="显示HDMI分辨率"/>
 
         <Button
-            android:id="@+id/btn_menu"
+            android:id="@+id/btn_get_vga_resolution"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/menu"/>
+            android:text="显示VGA分辨率"/>
+
+        <Button
+            android:id="@+id/btn_com_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/com_1"/>
+
+        <Button
+            android:id="@+id/btn_com_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/com_2"/>
+
+        <Button
+            android:id="@+id/btn_com_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/com_3"/>
+
+        <Button
+            android:id="@+id/btn_get_touch_port"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="当前Com口"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@id/ll_control_button_row_3"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="设置"/>
+
+        <Button
+            android:id="@+id/btn_poweroff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/poweroff"/>
+
+        <Button
+            android:id="@+id/btn_reboot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reboot"/>
+
+        <Button
+            android:id="@+id/btn_apk_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/apk_update"/>
+
+        <Button
+            android:id="@+id/btn_ota_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ota_update"/>
+
+        <Button
+            android:id="@+id/btn_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="电视家"/>
+
+        <Button
+            android:id="@+id/btn_navibar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="导航开关"/>
+
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@id/ll_control_button_row_3"
+        android:layout_alignParentRight="true"
         android:background="@android:color/darker_gray">
+
+        <Button
+            android:id="@+id/btn_scan_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击扫描"/>
 
         <TextView
             android:id="@+id/tv_remind"
@@ -350,10 +421,10 @@
 
     <SurfaceView
         android:id="@+id/video_surface1"
-        android:layout_width="450dp"
-        android:layout_marginLeft="20dp"
+        android:layout_width="350dp"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:layout_height="280dp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_marginLeft="20dp"/>
 
 </RelativeLayout>

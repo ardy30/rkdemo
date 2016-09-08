@@ -1,18 +1,19 @@
 package com.android.presentation.app.holder;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.RandomAccessFile;
-
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder.AudioSource;
 import android.util.Log;
 
+
 import com.android.lameutil.LameUtil;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 public class ExtAudioRecorder {
     //private final static int[] sampleRates = {44100, 22050, 11025, 8000};
@@ -23,8 +24,9 @@ public class ExtAudioRecorder {
     private int encode_data(byte[] b_buffer, int readSize) {
         short[] buffer = new short[readSize / 2];
         for (int i = 0; i < readSize; i += 2) {
-            buffer[i / 2] = (short) ((byte) b_buffer[i] + (short) (b_buffer[i + 1] * 0xFF));
+            buffer[i / 2] = (short) (b_buffer[i] + (short) (b_buffer[i + 1] * 0xFF));
         }
+
         int encodedSize = LameUtil.encode(buffer, buffer, readSize / 2, mMp3Buffer);
         if (encodedSize > 0) {
             try {
@@ -59,6 +61,7 @@ public class ExtAudioRecorder {
 
     public static ExtAudioRecorder getInstanse(Boolean recordingCompressed) {
         ExtAudioRecorder result = null;
+
         if (recordingCompressed) {
             result = new ExtAudioRecorder(false,
                     AudioSource.MIC,
@@ -73,9 +76,9 @@ public class ExtAudioRecorder {
                         sampleRates[i],
                         AudioFormat.CHANNEL_CONFIGURATION_STEREO,
                         AudioFormat.ENCODING_PCM_16BIT);
+
             }
-            while ((++i < sampleRates.length) & !(result.getState()
-                    == ExtAudioRecorder.State.INITIALIZING));
+            while ((++i < sampleRates.length) & !(result.getState() == ExtAudioRecorder.State.INITIALIZING));
         }
         return result;
     }
@@ -93,23 +96,31 @@ public class ExtAudioRecorder {
 
     public static final boolean RECORDING_UNCOMPRESSED = true;
     public static final boolean RECORDING_COMPRESSED = false;
+
     // The interval in which the recorded samples are output to the file
     // Used only in uncompressed mode
     private static final int TIMER_INTERVAL = 120;
+
     // Toggles uncompressed recording on/off; RECORDING_UNCOMPRESSED / RECORDING_COMPRESSED
     private boolean rUncompressed;
+
     // Recorder used for uncompressed recording
     private AudioRecord audioRecorder = null;
+
     // Stores current amplitude (only in uncompressed mode)
     private int cAmplitude = 0;
+
     // Output file path
     private String filePath_l = null;
     private String filePath_r = null;
+
     // Recorder state; see State
     private State state;
+
     // File writer (only in uncompressed mode)
     private RandomAccessFile randomAccessWriter_l;
     private RandomAccessFile randomAccessWriter_r;
+
     // Number of channels, sample rate, sample size(size in bits), buffer size, audio source, sample size(see AudioFormat)
     private short nChannels;
     private int sRate;
@@ -148,6 +159,7 @@ public class ExtAudioRecorder {
             audioRecorder.read(buffer, 0, buffer.length); // Fill buffer
             byte[] left_buffer = new byte[buffer.length / 2];
             byte[] right_buffer = new byte[buffer.length / 2];
+
             try {
                 int i;
                 int j;
@@ -186,7 +198,7 @@ public class ExtAudioRecorder {
 
     /**
      * Default constructor
-     * <p>
+     * <p/>
      * Instantiates a new recorder, in case of compressed recording the parameters can be left as 0.
      * In case of errors, no exception is thrown, but the state is set to ERROR
      */
@@ -199,14 +211,17 @@ public class ExtAudioRecorder {
                 } else {
                     bSamples = 8;
                 }
+
                 if (channelConfig == AudioFormat.CHANNEL_CONFIGURATION_MONO) {
                     nChannels = 1;
                 } else {
                     nChannels = 2;
                 }
+
                 aSource = audioSource;
                 sRate = sampleRate;
                 aFormat = audioFormat;
+
                 framePeriod = sampleRate * TIMER_INTERVAL / 1000;
                 bufferSize = framePeriod * 2 * bSamples * nChannels / 8;
                 if (bufferSize < AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat)) { // Check to make sure buffer size is not smaller than the smallest allowed one
@@ -215,10 +230,12 @@ public class ExtAudioRecorder {
                     framePeriod = bufferSize / (2 * bSamples * nChannels / 8);
                     Log.w(ExtAudioRecorder.class.getName(), "Increasing buffer size to " + Integer.toString(bufferSize));
                 }
+
                 audioRecorder = new AudioRecord(audioSource, sampleRate, channelConfig, audioFormat, bufferSize);
-                LameUtil.init(sampleRate, 1, sampleRate, 32, 2);
+                LameUtil.init(sampleRate, 1, sampleRate, 256, 0);
                 mMp3FileOutputStream = new FileOutputStream("/mnt/sdcard/l.mp3");
                 mMp3Buffer = new byte[(int) (7200 + (bufferSize * 2 * 1.25))];
+
                 if (audioRecorder.getState() != AudioRecord.STATE_INITIALIZED)
                     throw new Exception("AudioRecord initialization failed");
                 audioRecorder.setRecordPositionUpdateListener(updateListener);
@@ -241,8 +258,8 @@ public class ExtAudioRecorder {
     /**
      * Sets output file path, call directly after construction/reset.
      *
-     * @param argPath_l mic in接口输入的录音文件存放路径
-     * @param argPath_r line in接口输入的录音文件存放路径
+     * @param argPath_l line in file path
+     * @param argPath_r mic in file path
      */
     public void setOutputFile(String argPath_l, String argPath_r) {
         try {
@@ -307,7 +324,7 @@ public class ExtAudioRecorder {
 
                         randomAccessWriter.setLength(0); // Set file length to 0, to prevent unexpected behavior in case the file already existed
                         randomAccessWriter.writeBytes("RIFF");
-                        randomAccessWriter.writeInt(0); // Final file size not known yet, write 0 
+                        randomAccessWriter.writeInt(0); // Final file size not known yet, write 0
                         randomAccessWriter.writeBytes("WAVE");
                         randomAccessWriter.writeBytes("fmt ");
                         randomAccessWriter.writeInt(Integer.reverseBytes(16)); // Sub-chunk size, 16 for PCM
@@ -453,10 +470,10 @@ public class ExtAudioRecorder {
         }
     }
 
-    /* 
-     * 
+    /*
+     *
      * Converts a byte[2] to a short, in LITTLE_ENDIAN format
-     * 
+     *
      */
     private short getShort(byte argB1, byte argB2) {
         return (short) (argB1 | (argB2 << 8));
@@ -548,5 +565,3 @@ public class ExtAudioRecorder {
     }
 
 }
-
-

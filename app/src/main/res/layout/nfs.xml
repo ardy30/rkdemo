@@ -16,24 +16,53 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:orientation="vertical">
 
-	<EditText
-        android:id="@+id/input"
-        android:layout_width="fill_parent"
+    <EditText
+        android:id="@+id/et_server_mount_ip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:singleLine="true"
-        android:layout_height="wrap_content" >
+        android:hint="请输入NFS服务器的IP地址(eg:192.168.1.1)"
+        android:singleLine="true">
     </EditText>
 
-    <Button 
-            android:id="@+id/ok"
-            android:layout_width="100px"
-            android:layout_height="50px"
-            android:text="@string/ok"
-            android:layout_gravity="center"/>
+    <EditText
+        android:id="@+id/et_server_folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:hint="请输入NFS服务器端文件目录(eg:/media/hda)"
+        android:singleLine="true">
+    </EditText>
+
+    <EditText
+        android:id="@+id/et_local_mount_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:hint="请输入将NFS服务器挂载到本地的目录(eg:/mnt/sdcard)"
+        android:singleLine="true">
+    </EditText>
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="300px"
+        android:layout_height="50px"
+        android:layout_gravity="center"
+        android:text="挂载NFS"/>
+
+    <Button
+        android:id="@+id/no"
+        android:layout_width="300px"
+        android:layout_height="50px"
+        android:layout_gravity="center"
+        android:text="卸载已挂载的NFS"/>
 
 </LinearLayout>

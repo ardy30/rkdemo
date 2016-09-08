@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="445dp"
+                android:layout_height="222dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/popup_language_bg"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_choose_disk_title"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:gravity="center"
+        android:text="请选择ROM升级包所在磁盘"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
+
+    <View
+        android:id="@+id/v_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_choose_disk_title"
+        android:background="@android:color/darker_gray"/>
+
+    <ListView
+        android:id="@+id/lv_disks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/v_divider"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:scrollbarFadeDuration="4000"
+        android:scrollbars="vertical">
+    </ListView>
+
+</RelativeLayout>

@@ -1391,7 +1391,7 @@
     <string name="sswitch">原/伴</string>
     <string name="next">切歌</string>
     <string name="preview">预览</string>
-    <string name="channel">左右声道</string>
+    <string name="channel">切换声道</string>
     <string name="increase_sound">升调</string>
     <string name="decrease_sound">降调</string>
     <string name="landscape">横屏</string>
@@ -1404,12 +1404,15 @@
     <string name="full_screen">幻影</string>
     <string name="poweroff">关机</string>
     <string name="reboot">重启</string>
-    <string name="ota_update">OTA 升级</string>
-    <string name="apk_update">apk 升级</string>
+    <string name="ota_update">ROM升级</string>
+    <string name="apk_update">APK升级</string>
     <string name="passthrough">透传</string>
     <string name="screenpercent">屏幕切边</string>
     <string name="audio_mode">音频输出模式</string>
-    <string name="hdmi_mode">HDMI输出模式</string>
+    <string name="hdmi_mode">HDMI分辨率</string>
+    <string name="com_1">3.5下</string>
+    <string name="com_2">3.5上</string>
+    <string name="com_3">RJ45</string>
 
     <string name="back">返回</string>
     <string name="test">测试副屏触摸</string>
@@ -1536,7 +1539,7 @@
     <string name="volume_l">左声道音量</string>
     <string name="volume_r">右声道音量</string>
 
-    <string name="vga_mode">VGA显示模式</string>
+    <string name="vga_mode">VGA分辨率</string>
 
 
     <string name="menu_item_title1">播放模式</string>

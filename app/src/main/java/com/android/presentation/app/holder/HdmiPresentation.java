@@ -19,45 +19,55 @@ import com.android.presentation.app.view.MarqueeTextView;
  */
 public class HdmiPresentation extends Presentation {
 
-    private Context mContext;
-    private SurfaceView mVideoSurfaceHdmi;
-    private MarqueeTextView mMarqueeTextView;
+	private Context mContext;
+	private SurfaceView mVideoSurfaceHdmi;
+	private MarqueeTextView mMarqueeTextView;
 
-    public HdmiPresentation(Context context, Display display) {
-        super(context, display);
-        mContext = context;
-    }
+	public HdmiPresentation(Context context, Display display) {
+		super(context, display);
+		mContext = context;
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // Be sure to call the super class.
-        super.onCreate(savedInstanceState);
-        // Inflate the layout.
-        setContentView(R.layout.presentation_content);
-        mVideoSurfaceHdmi = (SurfaceView) findViewById(R.id.video_surface_hdmi);
-        mMarqueeTextView = (MarqueeTextView) findViewById(R.id.mtv_scroll);
-        mMarqueeTextView.setText("测试滚动字幕");
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.presentation_content);
+		mVideoSurfaceHdmi = (SurfaceView) findViewById(R.id.video_surface_hdmi);
+		mMarqueeTextView = (MarqueeTextView) findViewById(R.id.mtv_scroll);
+		mMarqueeTextView.setText("测试滚动字幕");
+	}
 
-    public SurfaceView getSurfaceView() {
-        return mVideoSurfaceHdmi;
-    }
+	public SurfaceView getSurfaceView() {
+		return mVideoSurfaceHdmi;
+	}
 
+	/**
+	 * 初始化播放器View
+	 *
+	 * @return
+	 */
+	public SurfaceView initSurfaceView() {
+		mVideoSurfaceHdmi = (SurfaceView) findViewById(R.id.video_surface_hdmi);
+		mVideoSurfaceHdmi.setZOrderOnTop(true);
+		return mVideoSurfaceHdmi;
+	}
 
-    public SurfaceView setSurfaceView() {
-        mVideoSurfaceHdmi = (SurfaceView) findViewById(R.id.video_surface_hdmi);
-        return mVideoSurfaceHdmi;
-    }
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		System.out.println("touch in the external window");
+		return super.onTouchEvent(event);
+	}
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        System.out.println("touch in the external window");
-        return super.onTouchEvent(event);
-    }
+	/**
+	 * 设置滚动字幕内容
+	 */
+	public void setScrollText(String text) {
+		mMarqueeTextView.setText(text);
+	}
 
-    @Override
-    public void onDisplayRemoved() {
-        mMarqueeTextView.setText("");
-        super.onDisplayRemoved();
-    }
+	@Override
+	public void onDisplayRemoved() {
+		mMarqueeTextView.setText("");
+		super.onDisplayRemoved();
+	}
 }
