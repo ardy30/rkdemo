@@ -348,6 +348,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_control_button_row_4"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10px"
@@ -400,9 +401,11 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/ll_control_button_row_4"
         android:background="@android:color/darker_gray">
 
         <Button
