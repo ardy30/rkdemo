@@ -25,7 +25,6 @@ public class MenuDialog extends Dialog implements OnClickListener {
 
     public MenuDialog(Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
         this.context = context;
         mSettingHelper = new VideoSettingHelper(context);
         mItemsPairSutitle = new IndexStringPair(null);
@@ -51,7 +50,6 @@ public class MenuDialog extends Dialog implements OnClickListener {
     }
 
     void init() {
-        // TODO Auto-generated method stub
         this.setContentView(R.layout.menu);
         this.setTitle(R.string.menu);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -221,7 +219,6 @@ public class MenuDialog extends Dialog implements OnClickListener {
     };
 
     public void onLeftClick(View view) {
-        // TODO Auto-generated method stub
         switch (view.getId()) {
             case R.id.linear_image_left2:
                 mFucusIndex = 1;
@@ -256,7 +253,6 @@ public class MenuDialog extends Dialog implements OnClickListener {
     }
 
     public void onRightClick(View view) {
-        // TODO Auto-generated method stub
         switch (view.getId()) {
             case R.id.linear_image_right2:
                 mFucusIndex = 1;

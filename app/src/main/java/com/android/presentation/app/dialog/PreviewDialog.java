@@ -30,7 +30,6 @@ public class PreviewDialog extends Dialog implements OnClickListener, SurfaceHol
 
     public PreviewDialog(Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
         this.context = context;
         init();
     }
@@ -41,7 +40,6 @@ public class PreviewDialog extends Dialog implements OnClickListener, SurfaceHol
     }
 
     void init() {
-        // TODO Auto-generated method stub
         this.setContentView(R.layout.preview);
         this.setTitle(R.string.preview);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
@@ -100,20 +98,16 @@ public class PreviewDialog extends Dialog implements OnClickListener, SurfaceHol
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
                                int height) {
-        // TODO Auto-generated method stub
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        // TODO Auto-generated method stub
         System.out.println("@@@@@@@@@@@surfaceCreated");
         play(holder);
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        // TODO Auto-generated method stub
-        // mMediaPlayer2.reset();
         if (mMediaPlayer2 != null) {
             Log.e(TAG, "mMediaPlayer2.release 2");
             mMediaPlayer2.release();

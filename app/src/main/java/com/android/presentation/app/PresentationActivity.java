@@ -32,6 +32,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.presentation.app.adapter.FileAdapter;
@@ -53,12 +54,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
-import java.util.concurrent.TimeUnit;
 
+/**
+ *
+ */
 public class PresentationActivity extends Activity implements
 		OnCheckedChangeListener, View.OnClickListener {
 	private final String TAG = "PresentationActivity";
@@ -79,7 +83,7 @@ public class PresentationActivity extends Activity implements
 	/**
 	 * 第二列的按钮
 	 */
-	private Button mBtnHdmiSwitch, mBtnSpdifSwitch, mBtnAudioMode, mBtnLinein, mBtnDuplicateScreen,
+	private Button mBtnHdmiSwitch, mBtnSpdifSwitch, mBtnLinein, mBtnDuplicateScreen,
 			mBtnPreview, mBtnFullScreen;
 	/**
 	 * 第三列的按钮
@@ -90,6 +94,14 @@ public class PresentationActivity extends Activity implements
 	 * 第四列的按钮
 	 */
 	private Button mBtnSetting, mBtnPoweroff, mBtnReboot, mBtnOtaUpdate, mBtnApkUpdate, mBtnTv, mBtnNavibar;
+	/**
+	 * 切换HDMI和SPDIF的透传开关
+	 */
+	private Switch switchHdmiPass, switchSpdifPass;
+	/**
+	 * HDMI SPDIF的透传是否打开
+	 */
+	private boolean isOpenHdmiPass, isOpenSpdifPass;
 	/**
 	 * 是否显示导航栏
 	 */
@@ -187,6 +199,7 @@ public class PresentationActivity extends Activity implements
 	 * 用来改变播放进度的任务管理Timer对象
 	 */
 	private Timer mTimer = new Timer();
+	private boolean initFinished;
 
 	/**
 	 * 创建需要的几个Dialog
@@ -217,8 +230,37 @@ public class PresentationActivity extends Activity implements
 		mApplication = (PresentationApplication) getApplication();
 		extAudioRecorder = ExtAudioRecorder.getInstanse(false);
 		mDisplayManager = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
+		initFinished = false;
 		initViews();
+		showViews();
 		initDatas();
+		initFinished = true;
+	}
+
+	/**
+	 * 显示View,在这里做一些初始化后的显示
+	 */
+	private void showViews() {
+		if (PresentationUtil.getIntegerValueFromFile(Constants.FILE_HDMI_OUTPUT_SWITCH) == 1) {
+			mBtnHdmiSwitch.setText("HDMI ON");
+			switchHdmiPass.setVisibility(View.VISIBLE);
+		} else {
+			mBtnHdmiSwitch.setText("HDMI OFF");
+			switchHdmiPass.setVisibility(View.GONE);
+		}
+		if (PresentationUtil.getIntegerValueFromFile(Constants.FILE_SPDIF_OUTPUT_SWITCH) == 1) {
+			mBtnSpdifSwitch.setText("SPDIF ON");
+			switchSpdifPass.setVisibility(View.VISIBLE);
+		} else {
+			mBtnSpdifSwitch.setText("SPDIF OFF");
+			switchSpdifPass.setVisibility(View.GONE);
+		}
+		if (PresentationUtil.getIntegerValueFromFile(Constants.FILE_HDMI_OUTPUT_PASS_SWITCH) == 1) {
+			switchHdmiPass.setChecked(true);
+		}
+		if (PresentationUtil.getIntegerValueFromFile(Constants.FILE_SPDIF_OUTPUT_PASS_SWITCH) == 1) {
+			switchSpdifPass.setChecked(true);
+		}
 	}
 
 	/**
@@ -280,8 +322,6 @@ public class PresentationActivity extends Activity implements
 		mBtnHdmiSwitch.setOnClickListener(this);
 		mBtnSpdifSwitch = (Button) findViewById(R.id.btn_spdif_switch);
 		mBtnSpdifSwitch.setOnClickListener(this);
-		mBtnAudioMode = (Button) findViewById(R.id.btn_audio_mode);
-		mBtnAudioMode.setOnClickListener(this);
 		mBtnLinein = (Button) findViewById(R.id.btn_linein);
 		mBtnLinein.setOnClickListener(this);
 		mBtnDuplicateScreen = (Button) findViewById(R.id.btn_duplicate_screen);
@@ -323,6 +363,10 @@ public class PresentationActivity extends Activity implements
 		mBtnNavibar = (Button) findViewById(R.id.btn_navibar);
 		mBtnNavibar.setOnClickListener(this);
 		//---------------end button------
+		switchHdmiPass = (Switch) findViewById(R.id.switch_hdmi_pass_switch);
+		switchHdmiPass.setOnCheckedChangeListener(mSwitchListener);
+		switchSpdifPass = (Switch) findViewById(R.id.switch_spdif_pass_switch);
+		switchSpdifPass.setOnCheckedChangeListener(mSwitchListener);
 		mTimer.schedule(mTimerTask, 0, 1000);
 	}
 
@@ -338,12 +382,17 @@ public class PresentationActivity extends Activity implements
 	 * 是否正在拖动播放进度条
 	 */
 	private boolean isDragSeekBar;
+
 	private TimerTask mTimerTask = new TimerTask() {
 		@Override
 		public void run() {
-			if (!isDragSeekBar && mMediaPlayer != null && mMediaPlayer.isPlaying()) {
-				sbPlayProgress.setProgress(
-						mMediaPlayer.getCurrentPosition() * 100 / mMediaPlayer.getDuration());
+			try {
+				if (!isDragSeekBar && mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+					sbPlayProgress.setProgress(
+							mMediaPlayer.getCurrentPosition() * 100 / mMediaPlayer.getDuration());
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
 			}
 		}
 	};
@@ -392,6 +441,44 @@ public class PresentationActivity extends Activity implements
 		}
 	};
 
+	/**
+	 * 开关按钮监听器
+	 */
+	private OnCheckedChangeListener mSwitchListener = new OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+			switch (compoundButton.getId()) {
+				case R.id.switch_hdmi_pass_switch:
+					if (initFinished) {
+						pausePlayer();
+						mhandler.sendEmptyMessageDelayed(PLAY, 5000);
+						PresentationUtil.switchHdmiPass(PresentationActivity.this, b);
+						isOpenHdmiPass = b;
+						switchHdmiPass.setEnabled(false);
+					}
+					break;
+				case R.id.switch_spdif_pass_switch:
+					if (initFinished) {
+						pausePlayer();
+						mhandler.sendEmptyMessageDelayed(PLAY, 5000);
+						PresentationUtil.switchSpdifPass(PresentationActivity.this, b);
+						isOpenSpdifPass = b;
+						switchSpdifPass.setEnabled(false);
+					}
+					break;
+			}
+		}
+	};
+
+	/**
+	 * 暂停播放器
+	 */
+	private void pausePlayer() {
+		if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
+			mMediaPlayer.pause();
+		}
+	}
+
 	@Override
 	public void onClick(View view) {
 		if (view == mBtnPlay) {//播放
@@ -399,9 +486,7 @@ public class PresentationActivity extends Activity implements
 				mMediaPlayer.start();
 			}
 		} else if (view == mBtnPause) {//暂停
-			if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
-				mMediaPlayer.pause();
-			}
+			pausePlayer();
 		} else if (view == mBtnSwitchTrack) {//原伴唱
 			switchTrack();
 		} else if (view == mBtnVolumeAdd) {//播放器音量+
@@ -456,12 +541,10 @@ public class PresentationActivity extends Activity implements
 			startActivity(intent);
 		} else if (view == mBtnHdmiSwitch) {//HDMI开关
 			mBtnHdmiSwitch.setEnabled(false);
-			hdmiSwitch();
+			soundSwitchHdmi();
 		} else if (view == mBtnSpdifSwitch) {//SPDIF开关
 			mBtnSpdifSwitch.setEnabled(false);
-			spdifSwitch();
-		} else if (view == mBtnAudioMode) {//音频输出模式
-			switchAudioMode();
+			soundSwitchSpdif();
 		} else if (view == mBtnHdmiMode) {//hdmi输出模式
 			switchHdmiMode();
 		} else if (view == mBtnVgaMode) {//vga输出模式
@@ -582,43 +665,63 @@ public class PresentationActivity extends Activity implements
 	/**
 	 * HDMI声音开关
 	 */
-	private void hdmiSwitch() {
+	private void soundSwitchHdmi() {
 		if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
 			mMediaPlayer.pause();
 		}
 		Intent intent = new Intent();
 		intent.setAction("com.ynh.set_hdmi_on_off");
 		if (mBtnHdmiSwitch.getText().toString().equals("HDMI OFF")) {//当前处于关闭状态
+			switchHdmiPass.setVisibility(View.VISIBLE);
+			if (isOpenHdmiPass) {
+				PresentationUtil.switchHdmiPass(this, isOpenHdmiPass);
+				isOpenHdmiPass = true;
+			}
 			intent.putExtra("on", 1);
 			mBtnHdmiSwitch.setText("HDMI ON");
 		} else {//当前处于开启状态
-			intent.putExtra("on", 0); //hdmi_on --- 0:off 1:on
+			switchHdmiPass.setVisibility(View.GONE);
+			//关闭HDMI时，如果透传是打开状态，那就关掉
+			if (PresentationUtil.getIntegerValueFromFile(Constants.FILE_HDMI_OUTPUT_PASS_SWITCH) == 1) {
+				PresentationUtil.switchHdmiPass(this, false);
+			}
+			intent.putExtra("on", 0);
 			mBtnHdmiSwitch.setText("HDMI OFF");
 		}
 		sendBroadcast(intent);
 		//延时播放
-		mhandler.sendEmptyMessageDelayed(PLAY, 6000);
+		mhandler.sendEmptyMessageDelayed(PLAY, 5000);
 	}
 
 	/**
 	 * SPDIF声音开关
 	 */
-	private void spdifSwitch() {
+	private void soundSwitchSpdif() {
 		if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
 			mMediaPlayer.pause();
 		}
 		Intent intent = new Intent();
 		intent.setAction("com.ynh.set_spdif_on_off");
 		if (mBtnSpdifSwitch.getText().toString().equals("SPDIF OFF")) {//当前处于关闭状态
+			switchSpdifPass.setVisibility(View.VISIBLE);
+			if (isOpenSpdifPass) {
+				PresentationUtil.switchSpdifPass(this, isOpenSpdifPass);
+				isOpenSpdifPass = true;
+			}
 			intent.putExtra("on", 1);
 			mBtnSpdifSwitch.setText("SPDIF ON");
 		} else {//当前处于开启状态
-			intent.putExtra("on", 0); //spdif_on --- 0:off 1:on
+			switchSpdifPass.setVisibility(View.GONE);
+			//关闭SPDIF时，如果透传是打开状态，那就关掉
+			if (PresentationUtil.getIntegerValueFromFile(Constants.FILE_SPDIF_OUTPUT_PASS_SWITCH) == 1) {
+				PresentationUtil.switchSpdifPass(this, false);
+			}
+			intent.putExtra("on", 0);
 			mBtnSpdifSwitch.setText("SPDIF OFF");
 		}
 		sendBroadcast(intent);
 		//延时播放
-		mhandler.sendEmptyMessageDelayed(PLAY, 2000);
+		mhandler.sendEmptyMessageDelayed(PLAY, 5000);
 	}
 
 	/**
@@ -670,23 +773,23 @@ public class PresentationActivity extends Activity implements
 	private void switchVgaMode() {
 		Intent intent = new Intent();
 		intent.setAction("com.android.vga_mode");
-//		if (mVgaModeValue == Constants.VGA_1280X720) {
-//			mVgaModeValue = Constants.VGA_1280X800;
-//			mBtnVgaMode.setText("1280X800");
-//		} else if (mVgaModeValue == Constants.VGA_1280X800) {
-//			mVgaModeValue = Constants.VGA_1440X900;
-//			mBtnVgaMode.setText("1440x900");
-//		} else if (mVgaModeValue == Constants.VGA_1440X900) {
-//			mVgaModeValue = Constants.VGA_1920X1080;
-//			mBtnVgaMode.setText("1920*1080");
-//		} else if (mVgaModeValue == Constants.VGA_1920X1080) {
-//			mVgaModeValue = Constants.VGA_1280X720;
-//			mBtnVgaMode.setText("1280x720");
-//		}
+		if (mVgaModeValue == Constants.VGA_1280X720) {
+			mVgaModeValue = Constants.VGA_1280X800;
+			mBtnVgaMode.setText("1280X800");
+		} else if (mVgaModeValue == Constants.VGA_1280X800) {
+			mVgaModeValue = Constants.VGA_1440X900;
+			mBtnVgaMode.setText("1440x900");
+		} else if (mVgaModeValue == Constants.VGA_1440X900) {
+			mVgaModeValue = Constants.VGA_1920X1080;
+			mBtnVgaMode.setText("1920*1080");
+		} else if (mVgaModeValue == Constants.VGA_1920X1080) {
+			mVgaModeValue = Constants.VGA_1280X720;
+			mBtnVgaMode.setText("1280x720");
+		}
 //		mVgaModeValue = Constants.VGA_1280X720;
 //		mVgaModeValue = Constants.VGA_1280X800;
 //		mVgaModeValue = Constants.VGA_1440X900;
-		mVgaModeValue = Constants.VGA_1920X1080;
+//		mVgaModeValue = Constants.VGA_1920X1080;
 
 		intent.putExtra("vga_mode", mVgaModeValue);
 		sendBroadcast(intent);
@@ -724,30 +827,6 @@ public class PresentationActivity extends Activity implements
 	}
 
 	/**
-	 * 切换音频输出模式
-	 */
-	private void switchAudioMode() {
-		System.out.println("audio mode");
-		Intent intent = new Intent();
-		intent.setAction("com.android.audio_mode");
-		if (mAudioModeValue == 0) {
-			mBtnAudioMode.setText("spdif passthrough");
-			intent.putExtra("audio_mode", 1);
-			mAudioModeValue = 2;
-		} else if (mAudioModeValue == 1) {
-			mBtnAudioMode.setText("default");
-			// 0: 默认输出 1:spdif源码输出 2:HDMI源码输出
-			intent.putExtra("audio_mode", 0);
-			mAudioModeValue = 0;
-		} else {
-			mBtnAudioMode.setText("HDMI passthrough");
-			intent.putExtra("audio_mode", 2);
-			mAudioModeValue = 1;
-		}
-		sendBroadcast(intent);
-	}
-
-	/**
 	 * 切换音轨
 	 */
 	private void switchTrack() {
@@ -780,7 +859,6 @@ public class PresentationActivity extends Activity implements
 				return;
 			}
 			if (mVideoSurfaceHdmi != null && enablePresentation) {
-				//TODO 修改滚动字幕
 				mPresentation.setScrollText(mFiles.get(curPlayIndex).getName());
 				mMediaPlayer.setMinorDisplay(mVideoSurfaceVga.getHolder());
 				mMediaPlayer.setDisplay(mVideoSurfaceHdmi.getHolder());
@@ -943,7 +1021,7 @@ public class PresentationActivity extends Activity implements
 	/**
 	 * Listens for displays to be added, changed or removed. We use it to update
 	 * the list and show a new {@link Presentation} when a display is connected.
-	 * <p/>
+	 * <p>
 	 * Note that we don't bother dismissing the {@link Presentation} when a
 	 * display is removed, although we could. The presentation API takes care of
 	 * doing that automatically for us.
@@ -952,6 +1030,9 @@ public class PresentationActivity extends Activity implements
 		public void onDisplayAdded(int displayId) {
 			Log.d(TAG, "Display #" + displayId + " added.");
 			mDisplayListAdapter.updateContents();
+			Intent intent = new Intent();
+			intent.setAction("com.ynh.check_hdmi");
+			sendBroadcast(intent);
 			if (mMediaPlayer != null) {
 				mMediaPlayer.release();
 				mMediaPlayer = null;
@@ -1136,6 +1217,8 @@ public class PresentationActivity extends Activity implements
 					}
 					mBtnHdmiSwitch.setEnabled(true);
 					mBtnSpdifSwitch.setEnabled(true);
+					switchHdmiPass.setEnabled(true);
+					switchSpdifPass.setEnabled(true);
 					break;
 			}
 		}
@@ -1168,7 +1251,6 @@ public class PresentationActivity extends Activity implements
 						}
 						pitch = 100;
 						if (mVideoSurfaceHdmi != null && enablePresentation) {
-							//TODO 修改滚动字幕
 							mPresentation.setScrollText(mFiles.get(curPlayIndex).getName());
 							player.setMinorDisplay(mVideoSurfaceVga.getHolder());
 							player.setDisplay(mVideoSurfaceHdmi.getHolder());
@@ -1195,7 +1277,6 @@ public class PresentationActivity extends Activity implements
 				mMediaPlayer.setDataSource(filename);
 			}
 			if (mVideoSurfaceHdmi != null && enablePresentation) {
-				//TODO 修改滚动字幕
 				mPresentation.setScrollText(filename.substring(filename.lastIndexOf("/") + 1));
 				mMediaPlayer.setMinorDisplay(mVideoSurfaceVga.getHolder());
 				mMediaPlayer.setDisplay(mVideoSurfaceHdmi.getHolder());
@@ -1262,7 +1343,7 @@ public class PresentationActivity extends Activity implements
 		extAudioRecorder.stop();
 		extAudioRecorder.release();
 		extAudioRecorder.pcm2wav("/mnt/sdcard/l.pcm", "/mnt/sdcard/l.wav");
-//		extAudioRecorder.pcm2wav("/mnt/sdcard/r.pcm", "/mnt/sdcard/r.wav");
+		extAudioRecorder.pcm2wav("/mnt/sdcard/r.pcm", "/mnt/sdcard/r.wav");
 		extAudioRecorder.flushAndRelease();
 	}
 
@@ -1287,7 +1368,6 @@ public class PresentationActivity extends Activity implements
 					mMediaPlayer.setDataSource(mFiles.get(position)
 							.getAbsolutePath());
 					if (mVideoSurfaceHdmi != null && enablePresentation) {
-						//TODO 修改滚动字幕
 						mPresentation.setScrollText(mFiles.get(position).getName());
 						mMediaPlayer.setMinorDisplay(mVideoSurfaceVga
 								.getHolder());
@@ -1301,6 +1381,7 @@ public class PresentationActivity extends Activity implements
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+
 				curPlayIndex = position;
 			}
 		});
@@ -1348,6 +1429,8 @@ public class PresentationActivity extends Activity implements
 
 	/**
 	 * 更新扫描到的文件
+	 *
+	 * @param nfsFiles 扫描到的文件
 	 */
 	public void updateFile(List<File> nfsFiles) {
 		mFiles.removeAll(nfsFiles);

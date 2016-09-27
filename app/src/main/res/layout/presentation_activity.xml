@@ -230,17 +230,37 @@
             android:layout_height="wrap_content"
             android:text="HDMI声音"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="HDMI透传开关"/>
+
+        <Switch
+            android:id="@+id/switch_hdmi_pass_switch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:checked="false"
+            android:textOff="关闭"
+            android:textOn="开启"/>
+
         <Button
             android:id="@+id/btn_spdif_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="SPDIF声音"/>
 
-        <Button
-            android:id="@+id/btn_audio_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/audio_mode"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="SPDIF透传开关"/>
+
+        <Switch
+            android:id="@+id/switch_spdif_pass_switch"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:checked="false"
+            android:textOff="关闭"
+            android:textOn="开启"/>
 
         <Button
             android:id="@+id/btn_linein"

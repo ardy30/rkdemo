@@ -30,9 +30,7 @@ public class NfsDialog extends Dialog implements OnClickListener {
 
     public NfsDialog(Context context) {
         super(context);
-        // TODO Auto-generated constructor stub
         this.context = context;
-
         init();
     }
 
@@ -42,8 +40,6 @@ public class NfsDialog extends Dialog implements OnClickListener {
     }
 
     void init() {
-        // TODO Auto-generated method stub
-
         this.setContentView(R.layout.nfs);
         this.setTitle("请输入下面的信息！挂载请全部输入，卸载只需要输入之前挂载在本地的目录！");
 
