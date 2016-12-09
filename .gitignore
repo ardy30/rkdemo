@@ -1,9 +1,4 @@
 *.iml
-.gradle
 /local.properties
 */build
 /.idea
-app/build/
-settings.gradle
-/projectFilesBackup
-app/lint.xml
