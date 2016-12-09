@@ -56,8 +56,11 @@ public class NfsDialog extends Dialog implements OnClickListener {
         mNo.setOnClickListener(this);
 
         etNfsServerIp = (EditText) findViewById(R.id.et_server_mount_ip);
+        etNfsServerIp.setText("10.0.0.10");
         etServerFolder = (EditText) findViewById(R.id.et_server_folder);
+        etServerFolder.setText("/3D");
         etLocalMountPoint = (EditText) findViewById(R.id.et_local_mount_point);
+        etLocalMountPoint.setText("/mnt/sdcard");
     }
 
     @Override

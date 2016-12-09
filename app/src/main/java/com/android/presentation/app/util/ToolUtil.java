@@ -29,7 +29,8 @@ public class ToolUtil {
                 return (arg0.getAbsolutePath().endsWith(".yc")
                         || arg0.getAbsolutePath().endsWith(".mp4")
                         || arg0.getAbsolutePath().endsWith(".mpg")
-                        || arg0.getAbsolutePath().endsWith(".mkv") || arg0
+                        || arg0.getAbsolutePath().endsWith(".mkv")
+                        || arg0.getAbsolutePath().endsWith(".iso")|| arg0
                         .isDirectory());
             }
         });

@@ -57,7 +57,7 @@ public class Constants {
 	/**
 	 * HTTP播放地址前缀，使用时在后面加上媒体文件名字即可
 	 */
-	public static String URL_PREFIX = SERVER_IP + "TEST/";
+	public static String URL_PREFIX = SERVER_IP + "test/TEST/";
 	/**
 	 * 电视家app的包名
 	 */

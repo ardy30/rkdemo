@@ -1,6 +1,7 @@
 package com.android.presentation.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Presentation;
 import android.content.Context;
@@ -53,12 +54,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
+
+import jcifs.smb.SmbException;
+import jcifs.smb.SmbFile;
 
 /**
  *
@@ -374,7 +379,7 @@ public class PresentationActivity extends Activity implements
 	 * 初始化数据
 	 */
 	private void initDatas() {
-		initHttpPlayFile();
+//		initHttpPlayFile();
 		getFiles();
 	}
 
@@ -404,14 +409,14 @@ public class PresentationActivity extends Activity implements
 		if (mHttpFileNames.size() > 0) {
 			mHttpFileNames.clear();
 		}
-//        mHttpFileNames.add("13703YHD.mpg");
-//        mHttpFileNames.add("18027YHD.mpg");
-//        mHttpFileNames.add("52427YHD.mpg");
-//        mHttpFileNames.add("80254YHD.mpg");
-//        mHttpFileNames.add("80319YHD.mpg");
-//        mHttpFileNames.add("80344YHD.mpg");
-//        mHttpFileNames.add("80347YHD.mpg");
-//        mHttpFileNames.add("80560YHD.mpg");
+		mHttpFileNames.add("13703YHD.mpg");
+		mHttpFileNames.add("18027YHD.mpg");
+		mHttpFileNames.add("52427YHD.mpg");
+		mHttpFileNames.add("80254YHD.mpg");
+		mHttpFileNames.add("80319YHD.mpg");
+		mHttpFileNames.add("80344YHD.mpg");
+		mHttpFileNames.add("80347YHD.mpg");
+		mHttpFileNames.add("80560YHD.mpg");
 //        mHttpFileNames.add("80573YHD.mpg");
 //        mHttpFileNames.add("80630YHD.mpg");
 	}
@@ -674,7 +679,7 @@ public class PresentationActivity extends Activity implements
 		if (mBtnHdmiSwitch.getText().toString().equals("HDMI OFF")) {//当前处于关闭状态
 			switchHdmiPass.setVisibility(View.VISIBLE);
 			if (isOpenHdmiPass) {
-				PresentationUtil.switchHdmiPass(this, isOpenHdmiPass);
+				PresentationUtil.switchHdmiPass(this, true);
 				isOpenHdmiPass = true;
 			}
 			intent.putExtra("on", 1);
@@ -690,7 +695,7 @@ public class PresentationActivity extends Activity implements
 		}
 		sendBroadcast(intent);
 		//延时播放
-		mhandler.sendEmptyMessageDelayed(PLAY, 5000);
+		mhandler.sendEmptyMessageDelayed(PLAY, 6000);
 	}
 
 	/**
@@ -705,7 +710,7 @@ public class PresentationActivity extends Activity implements
 		if (mBtnSpdifSwitch.getText().toString().equals("SPDIF OFF")) {//当前处于关闭状态
 			switchSpdifPass.setVisibility(View.VISIBLE);
 			if (isOpenSpdifPass) {
-				PresentationUtil.switchSpdifPass(this, isOpenSpdifPass);
+				PresentationUtil.switchSpdifPass(this, true);
 				isOpenSpdifPass = true;
 			}
 			intent.putExtra("on", 1);
@@ -721,7 +726,7 @@ public class PresentationActivity extends Activity implements
 		}
 		sendBroadcast(intent);
 		//延时播放
-		mhandler.sendEmptyMessageDelayed(PLAY, 5000);
+		mhandler.sendEmptyMessageDelayed(PLAY, 6000);
 	}
 
 	/**
@@ -771,32 +776,57 @@ public class PresentationActivity extends Activity implements
 	 * 切换VGA模式
 	 */
 	private void switchVgaMode() {
-		Intent intent = new Intent();
-		intent.setAction("com.android.vga_mode");
-		if (mVgaModeValue == Constants.VGA_1280X720) {
-			mVgaModeValue = Constants.VGA_1280X800;
-			mBtnVgaMode.setText("1280X800");
-		} else if (mVgaModeValue == Constants.VGA_1280X800) {
-			mVgaModeValue = Constants.VGA_1440X900;
-			mBtnVgaMode.setText("1440x900");
-		} else if (mVgaModeValue == Constants.VGA_1440X900) {
-			mVgaModeValue = Constants.VGA_1920X1080;
-			mBtnVgaMode.setText("1920*1080");
-		} else if (mVgaModeValue == Constants.VGA_1920X1080) {
-			mVgaModeValue = Constants.VGA_1280X720;
-			mBtnVgaMode.setText("1280x720");
+//		Intent intent = new Intent();
+//		intent.setAction("com.android.vga_mode");
+		switch (mVgaModeValue) {//循环切Vga分辨率
+			case Constants.VGA_1280X720:
+				mVgaModeValue = Constants.VGA_1280X800;
+				mBtnVgaMode.setText("1280X800");
+				break;
+			case Constants.VGA_1280X800:
+				mVgaModeValue = Constants.VGA_1440X900;
+				mBtnVgaMode.setText("1440x900");
+				break;
+			case Constants.VGA_1440X900:
+				mVgaModeValue = Constants.VGA_1920X1080;
+				mBtnVgaMode.setText("1920*1080");
+				break;
+			case Constants.VGA_1920X1080:
+				mVgaModeValue = Constants.VGA_1280X720;
+				mBtnVgaMode.setText("1280x720");
+				break;
 		}
+
 //		mVgaModeValue = Constants.VGA_1280X720;
 //		mVgaModeValue = Constants.VGA_1280X800;
 //		mVgaModeValue = Constants.VGA_1440X900;
 //		mVgaModeValue = Constants.VGA_1920X1080;
 
-		intent.putExtra("vga_mode", mVgaModeValue);
-		sendBroadcast(intent);
+//		intent.putExtra("vga_mode", mVgaModeValue);
+//		sendBroadcast(intent);
+
 		Intent intent1 = new Intent();
 		intent1.setAction("com.ynh.vga_mode");
 		intent1.putExtra("vga_mode", mVgaModeValue);
 		sendBroadcast(intent1);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("重启提示：");
+		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				mhandler.sendEmptyMessageDelayed(REBOOT,2000);
+				ToastUtil.showToastAndCancel(PresentationActivity.this,"即将重启！请稍等！",true);
+				dialogInterface.dismiss();
+			}
+		});
+		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				dialogInterface.dismiss();
+			}
+		});
+		builder.setMessage("已经切换VGA分辨率，需要重启后才能生效，现在重启吗？");
+		builder.show();
 	}
 
 	/**
@@ -937,7 +967,7 @@ public class PresentationActivity extends Activity implements
 
 	@Override
 	public void onBackPressed() {
-//		super.onBackPressed();
+		super.onBackPressed();
 	}
 
 	@Override
@@ -1200,6 +1230,7 @@ public class PresentationActivity extends Activity implements
 
 	public static final int START_PLAY = 0;
 	public static final int PLAY = 1;
+	public static final int REBOOT = 2;
 	Handler mhandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -1219,6 +1250,9 @@ public class PresentationActivity extends Activity implements
 					mBtnSpdifSwitch.setEnabled(true);
 					switchHdmiPass.setEnabled(true);
 					switchSpdifPass.setEnabled(true);
+					break;
+				case REBOOT:
+					PresentationUtil.rebootDevice(PresentationActivity.this);
 					break;
 			}
 		}
@@ -1421,7 +1455,9 @@ public class PresentationActivity extends Activity implements
 					}
 				}
 			}
-		};
+		}
+
+		;
 		return asyncTask;
 	}
 
